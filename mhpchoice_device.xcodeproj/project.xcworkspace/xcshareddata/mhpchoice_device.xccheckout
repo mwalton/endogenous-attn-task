@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>77EFAA5A-6C85-4B82-AB42-72B88B17CAF2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>mhpchoice_device</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>093A9E84-25A0-4D4D-AEAF-5679DBF83069</key>
+		<string>https://github.com/ucsccogmod/EPICXAF_tls_v1.2.git</string>
+		<key>B3754C8D-3767-4DFC-8992-B5440C7751AF</key>
+		<string>https://github.com/ucsccogmod/ChoiceTask.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mhpchoice_device.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>093A9E84-25A0-4D4D-AEAF-5679DBF83069</key>
+		<string>../../../EPICXAF_tls_v1.2</string>
+		<key>B3754C8D-3767-4DFC-8992-B5440C7751AF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ucsccogmod/ChoiceTask.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B3754C8D-3767-4DFC-8992-B5440C7751AF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B3754C8D-3767-4DFC-8992-B5440C7751AF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ChoiceTask</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>093A9E84-25A0-4D4D-AEAF-5679DBF83069</string>
+			<key>IDESourceControlWCCName</key>
+			<string>EPICXAF_tls_v1</string>
+		</dict>
+	</array>
+</dict>
+</plist>

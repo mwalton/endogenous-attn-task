@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06FC21C71897188100C0BFA7 /* EPICLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FC21C61897188100C0BFA7 /* EPICLib.framework */; };
+		C304576F0E39350100233D97 /* simple_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C304576A0E39350100233D97 /* simple_device.cpp */; };
+		C30457700E39350100233D97 /* Statistics.h in Headers */ = {isa = PBXBuildFile; fileRef = C304576B0E39350100233D97 /* Statistics.h */; };
+		C30457710E39350100233D97 /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C304576C0E39350100233D97 /* Statistics.cpp */; };
+		C30457720E39350100233D97 /* create_simple_device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C304576D0E39350100233D97 /* create_simple_device.cpp */; };
+		C30457730E39350100233D97 /* simple_device.h in Headers */ = {isa = PBXBuildFile; fileRef = C304576E0E39350100233D97 /* simple_device.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		06FC21C61897188100C0BFA7 /* EPICLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EPICLib.framework; path = ../../../../Library/Frameworks/EPICLib.framework; sourceTree = "<group>"; };
+		C304576A0E39350100233D97 /* simple_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = simple_device.cpp; path = Source/simple_device.cpp; sourceTree = "<group>"; };
+		C304576B0E39350100233D97 /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Statistics.h; path = Source/Statistics.h; sourceTree = "<group>"; };
+		C304576C0E39350100233D97 /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Statistics.cpp; path = Source/Statistics.cpp; sourceTree = "<group>"; };
+		C304576D0E39350100233D97 /* create_simple_device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = create_simple_device.cpp; path = Source/create_simple_device.cpp; sourceTree = "<group>"; };
+		C304576E0E39350100233D97 /* simple_device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = simple_device.h; path = Source/simple_device.h; sourceTree = "<group>"; };
+		C317A95E13790AF600173B5F /* mhpchoice_clean.prs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhpchoice_clean.prs; sourceTree = "<group>"; };
+		C317A95F13790AF600173B5F /* mhpchoice_clean_tls.prs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhpchoice_clean_tls.prs; sourceTree = "<group>"; };
+		D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmhpchoice_debug_device.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D289988505E68E00004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06FC21C71897188100C0BFA7 /* EPICLib.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* JEP99EXPT3_device */ = {
+			isa = PBXGroup;
+			children = (
+				06FC21C61897188100C0BFA7 /* EPICLib.framework */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C317A95D13790AF600173B5F /* Rules */,
+				B7E220150E2400270086E23C /* External Frameworks */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = JEP99EXPT3_device;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C304576E0E39350100233D97 /* simple_device.h */,
+				C304576D0E39350100233D97 /* create_simple_device.cpp */,
+				C304576A0E39350100233D97 /* simple_device.cpp */,
+				C304576B0E39350100233D97 /* Statistics.h */,
+				C304576C0E39350100233D97 /* Statistics.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B7E220150E2400270086E23C /* External Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "External Frameworks";
+			sourceTree = "<group>";
+		};
+		C317A95D13790AF600173B5F /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				C317A95E13790AF600173B5F /* mhpchoice_clean.prs */,
+				C317A95F13790AF600173B5F /* mhpchoice_clean_tls.prs */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC0600554660B00DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30457700E39350100233D97 /* Statistics.h in Headers */,
+				C30457730E39350100233D97 /* simple_device.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC0620554660B00DB518D /* mhpchoice_device */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB914A08733D8E0010E9CD /* Build configuration list for PBXNativeTarget "mhpchoice_device" */;
+			buildPhases = (
+				D2AAC0600554660B00DB518D /* Headers */,
+				D2AAC0610554660B00DB518D /* Sources */,
+				D289988505E68E00004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mhpchoice_device;
+			productName = JEP99EXPT3_device;
+			productReference = D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "mhpchoice_device" */;
+			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* JEP99EXPT3_device */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC0620554660B00DB518D /* mhpchoice_device */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC0610554660B00DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C304576F0E39350100233D97 /* simple_device.cpp in Sources */,
+				C30457710E39350100233D97 /* Statistics.cpp in Sources */,
+				C30457720E39350100233D97 /* create_simple_device.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB914B08733D8E0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/michaelwalton/workspace/EPICXAF_tls_v1.2/build/Debug,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = mhpchoice_debug_device;
+				SDKROOT = macosx;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		1DEB914C08733D8E0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/michaelwalton/workspace/EPICXAF_tls_v1.2/build/Debug,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = mhpchoice_release_device;
+				SDKROOT = macosx;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1DEB914F08733D8E0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_C_LANGUAGE_STANDARD = ansi;
+				GCC_ENABLE_ASM_KEYWORD = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_FAST_OBJC_DISPATCH = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = mh_dylib;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Debug;
+		};
+		1DEB915008733D8E0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_C_LANGUAGE_STANDARD = ansi;
+				GCC_ENABLE_ASM_KEYWORD = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_FAST_OBJC_DISPATCH = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = mh_dylib;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB914A08733D8E0010E9CD /* Build configuration list for PBXNativeTarget "mhpchoice_device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB914B08733D8E0010E9CD /* Debug */,
+				1DEB914C08733D8E0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "mhpchoice_device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB914F08733D8E0010E9CD /* Debug */,
+				1DEB915008733D8E0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

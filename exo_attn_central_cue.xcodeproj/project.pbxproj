@@ -102,9 +102,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC0620554660B00DB518D /* mhpchoice_device */ = {
+		D2AAC0620554660B00DB518D /* exo_attn_central_cue */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB914A08733D8E0010E9CD /* Build configuration list for PBXNativeTarget "mhpchoice_device" */;
+			buildConfigurationList = 1DEB914A08733D8E0010E9CD /* Build configuration list for PBXNativeTarget "exo_attn_central_cue" */;
 			buildPhases = (
 				D2AAC0600554660B00DB518D /* Headers */,
 				D2AAC0610554660B00DB518D /* Sources */,
@@ -114,7 +114,7 @@
 			);
 			dependencies = (
 			);
-			name = mhpchoice_device;
+			name = exo_attn_central_cue;
 			productName = JEP99EXPT3_device;
 			productReference = D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
@@ -126,7 +126,7 @@
 			isa = PBXProject;
 			attributes = {
 			};
-			buildConfigurationList = 1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "mhpchoice_device" */;
+			buildConfigurationList = 1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "exo_attn_central_cue" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -140,7 +140,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC0620554660B00DB518D /* mhpchoice_device */,
+				D2AAC0620554660B00DB518D /* exo_attn_central_cue */,
 			);
 		};
 /* End PBXProject section */
@@ -266,7 +266,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB914A08733D8E0010E9CD /* Build configuration list for PBXNativeTarget "mhpchoice_device" */ = {
+		1DEB914A08733D8E0010E9CD /* Build configuration list for PBXNativeTarget "exo_attn_central_cue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB914B08733D8E0010E9CD /* Debug */,
@@ -275,7 +275,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "mhpchoice_device" */ = {
+		1DEB914E08733D8E0010E9CD /* Build configuration list for PBXProject "exo_attn_central_cue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB914F08733D8E0010E9CD /* Debug */,

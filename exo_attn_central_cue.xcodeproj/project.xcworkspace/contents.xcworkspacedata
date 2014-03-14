@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:mhpchoice_device.xcodeproj">
+      location = "self:exo_attn_central_cue.xcodeproj">
    </FileRef>
 </Workspace>

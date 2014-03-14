@@ -1,6 +1,6 @@
 //Setup Initial WM contents. 
 (Define Initial_memory_contents (Goal Do choice_task))
-(Define Parameters (Eye Saliency_map Parafoveal .15 7.5 1))
+(Define Parameters (Eye Saliency_map Overt_Retinal .15 7.5 .1 1)) //need to fix covert_only
 
 //**********************************************************************************************
 ;#            BLOCK AND TRIAL MANAGEMENT RULES

@@ -40,13 +40,14 @@ private:
 	
 	task_type_e task_type;
 	
-	enum State_e {START, START_TRIAL, REMOVE_FIXATION, PRESENT_STIMULUS, WAITING_FOR_RESPONSE, DISCARD_STIMULUS, SHUTDOWN};
+	enum State_e {START, START_TRIAL, REMOVE_CUE, PRESENT_STIMULUS, WAITING_FOR_RESPONSE, DISCARD_STIMULUS, SHUTDOWN};
 	
 	State_e state;
 	
 	// parameters
 	int n_total_trials;	 //total trials in the run
-	int colorcount; //number of colors to display
+	//int colorcount; //number of colors to display
+    double percent_invalid;
 	std::string tagstr; //for any info, defaults to "draft"
 	
 	
@@ -56,12 +57,13 @@ private:
 	std::vector<double> vlocs; //list of x offsets for vstim location
 
 	// data states
-	Symbol wstim_v_name;  //visual warning stim name on each trial
+	Symbol cstim_v_name;  //visual warning stim name on each trial
 
 	Symbol vstim_name;    //visual stimulus name on each trial
 	Symbol vstim_text;    //actual visual stimulus [UNUSED]
 	Symbol vstim_color;	  //actual visual stimulus
 	Symbol correct_vresp; //current correct response for visual stimulus
+    Symbol valid_cue;
 
 	int trial;                 //curent trial number
 	bool vresponse_made;       //whether visual response has been made
@@ -86,7 +88,7 @@ private:
 			
 	// helpers
 	void parse_condition_string();
-	void present_fixation_point();
+	void present_cue();
 	void remove_fixation_point();
 	void start_trial();
 	void present_stimulus();

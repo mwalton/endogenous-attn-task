@@ -31,8 +31,9 @@ using namespace std;
 using std::ostringstream;
 
 // handy internal constants
-const Symbol Warning_c("#");
-const Symbol VWarn_c("Fixation");
+const Symbol Cue_Left_c("<");
+const Symbol Cue_Rigth_c(">");
+const Symbol VCue_c("Cue");
 const Symbol VStim_c("Stimulus");
 
 //const Symbol Right_of_c("Right_of");
@@ -51,7 +52,7 @@ const bool show_states = false;
 
 simple_device::simple_device(const std::string& device_name, Output_tee& ot) :
 		Device_base(device_name, ot), 
-        n_total_trials(0), condition_string("10 4 Easy Draft"), task_type(Easy), colorcount(4), n_trials(0), trial(0), vresponse_made(false), tagstr("Draft"),
+        n_total_trials(0), condition_string("10 0 Easy Draft"), task_type(Easy), percent_invalid(0), n_trials(0), trial(0), vresponse_made(false), tagstr("Draft"),
 	state(START) //should this be in initialize? (tls)
 {
 	// parse condition string and initialize the task
@@ -65,26 +66,26 @@ void simple_device::parse_condition_string()
 {
 	// build an error message string in case we need it
 	string error_msg(condition_string);
-	error_msg += "\n Should be: space-delimited trials(int > 0) colors(1-4) difficulty(Easy or Hard)";
+	error_msg += "\n Should be: space-delimited trials(int > 0) proportion of invalid cues(1-4) difficulty(Easy or Hard)";
 	istringstream iss(condition_string);
 	
 	int nt;
-	int nc;
+	int pi;
 	string tt;
 	string ts;
-	iss >> nt >> nc >> tt >> ts;
+	iss >> nt >> pi >> tt >> ts;
 	// do all error checks before last read
 	if(!iss)
 		throw Device_exception(this, string("Incorrect condition string: ") + error_msg);
 	if(nt <= 0)
 		throw Device_exception(this, string("Number of trials must be positive ") + error_msg);
-	if((nc < 1) || (nc > 4))	
-		throw Device_exception(this, string("Number of colors must be between 1 and 4 ") + error_msg);
+	if((pi < 0) || (pi > 1))
+		throw Device_exception(this, string("Proportion of invalid cues must be between 0 and 1 ") + error_msg);
 	if(!(tt == "Easy" || tt == "easy" || tt == "Hard" || tt == "Hard"))	
 		throw Device_exception(this, string("Task difficulty must be 'Easy' or 'Hard'") + error_msg);
 	//assign parameters
 	if (tagstr != "") tagstr = ts;
-	colorcount = nc;
+	percent_invalid = pi;
 	n_trials = nt;
 	if(tt == "Easy" || tt == "easy")
 		task_type = Easy; //all stim at fixation
@@ -126,15 +127,16 @@ void simple_device::initialize()
 
 	
 	//identify the experiment in the device and trace output
+    //TODO make parameter output appropriate for task
 	if(device_out) {
 		device_out << "******************************************" << endl;
-		device_out << "Initializeing Device: MHP Choice Task v5.2" << endl;
+		device_out << "Initializeing Device: Exogenous Attention Task v0.1" << endl;
 		device_out << "Conditions: " << condition_string << endl;
 		device_out << "******************************************" << endl;
 	
 		device_out << "**********************************************************************" << endl;
 		device_out << " trial start" << endl;
-		device_out << " Visual Warning '#' (1000ms)" << endl;
+		device_out << " Visual Cue '<' or '>' (1000ms)" << endl;
 		device_out << " Blank Screen (500-1300ms)" << endl;
 		device_out << " Stimulus (Red,Green,Blue, or Yellow) circle, " << endl;
 		device_out << " {button press --> U, I, O, or P}" << endl;
@@ -241,10 +243,10 @@ void simple_device::handle_Delay_event(const Symbol& type, const Symbol& datum,
 			//Trial Start Detected. Show Warning Stimuli, Set State For Warning Removal in 500 ms
 			vresponse_made = false;
 			start_trial();
-			state = REMOVE_FIXATION;
+			state = REMOVE_CUE;
 			schedule_delay_event(1000);
 			break;
-		case REMOVE_FIXATION:
+		case REMOVE_CUE:
 			if (show_states) show_message("********-->STATE: REMOVE_FIXATION",true);
 			//Remove The Fixation, wait 500-1300ms, Show Stimulus
 			remove_fixation_point();
@@ -292,23 +294,33 @@ void simple_device::start_trial()
 	
 	trial++; //increment trial counter
 	
-	present_fixation_point();
+	present_cue();
 	
 	if (show_debug) show_message("trial_start*", true);
 }
 
-void simple_device::present_fixation_point()
+void simple_device::present_cue()
 {
 	
-	if (show_debug) show_message("*present_fixation|");
+	if (show_debug) show_message("*present_cue|");
+    
+    int left_or_right = rand() % 2;
+    switch (left_or_right) {
+        case 0:
+            valid_cue = Cue_Left_c;
+            break;
+        default:
+            valid_cue = Cue_Rigth_c;
+            break;
+    }
 	
 	//display visual fixation piont 
-	wstim_v_name = concatenate_to_Symbol(VWarn_c, trial);
-	make_visual_object_appear(wstim_v_name, wstim_location_c, wstim_size_c);
-	set_visual_object_property(wstim_v_name, Text_c, Warning_c);
-	set_visual_object_property(wstim_v_name, Color_c, Black_c);	
+	cstim_v_name = concatenate_to_Symbol(VCue_c, trial);
+	make_visual_object_appear(cstim_v_name, wstim_location_c, wstim_size_c);
+	set_visual_object_property(cstim_v_name, Text_c, valid_cue);
+	set_visual_object_property(cstim_v_name, Color_c, Black_c);
 	
-	if (show_debug) show_message("present_fixation*", true);
+	if (show_debug) show_message("present_cue*", true);
 }
 
 void simple_device::remove_fixation_point()
@@ -316,7 +328,7 @@ void simple_device::remove_fixation_point()
 	if (show_debug) show_message("*remove_fixation|");	
 	
 	// remove the warningstimulus
-	make_visual_object_disappear(wstim_v_name);	
+	make_visual_object_disappear(cstim_v_name);
 	
 	if (show_debug) show_message("remove_fixation*", true);
 }
@@ -331,35 +343,21 @@ void simple_device::present_stimulus()
 void simple_device::make_vis_stim_appear()
 {
 	if (show_debug) show_message("*make_vis_stim_appear|");
-	int stim_index = random_int(colorcount);				// chooses one of the vstims to display
+	int stim_index = random_int(1);				// chooses one of the vstims to display
 	vstim_color = vstims.at(stim_index);
 	correct_vresp = vresps.at(stim_index);
 	vstim_name = concatenate_to_Symbol(VStim_c, trial);
 	
+    
+    
 	switch(task_type) {
 		case Easy: 
-			vstim_xloc = 0.;
+			if (valid_cue == Cue_Left_c) vstim_xloc = -3.;
+            else vstim_xloc = 3.;
 			break;
 		case Hard: 
-			//randomly choose xoffset
-			int loc_index = random_int(5) + 1;
-			switch(loc_index) {
-				case 1:
-					vstim_xloc = 0.;
-					break;
-				case 2:
-					vstim_xloc = 1.;
-					break;
-				case 3:
-					vstim_xloc = 2.;
-					break;
-				case 4:
-					vstim_xloc = -1.;
-					break;	
-				case 5:
-					vstim_xloc = -2.;
-					break;
-			}		
+			if (valid_cue == Cue_Left_c) vstim_xloc = -7.;
+            else vstim_xloc = 7.;
 			break;
 	}
 	
@@ -383,6 +381,7 @@ void simple_device::make_vis_stim_appear()
 
 
 // here if a keystroke event is received
+//TODO: make compatable w/ attn model
 void simple_device::handle_Keystroke_event(const Symbol& key_name)
 {
 	if (show_debug) show_message("*handle_Keystroke_event....",true);
@@ -394,7 +393,7 @@ void simple_device::handle_Keystroke_event(const Symbol& key_name)
 		if(trial > 1) current_vrt.update(rt);
 		outputString.str("");
 		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (CORRECT)" << endl;
-		DataOutputString << "MHPCHOICETASK" << "," << task_type << "," << trial << "," << rt << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "CORRECT" << "," << colorcount << "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
+		DataOutputString << "MHPCHOICETASK" << "," << task_type << "," << trial << "," << rt << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "CORRECT" << "," << "fixme:COLORCNT_PLACEHOLDER" << "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
 	}
 	else {
 		//throw Device_exception(this, string("Unrecognized keystroke: ") + key_name.str());
@@ -402,7 +401,7 @@ void simple_device::handle_Keystroke_event(const Symbol& key_name)
 		//if(trial > 1) current_vrt.update(rt); //don't average incorrect responses 
 		outputString.str("");
 		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (INCORRECT)" << endl;
-		DataOutputString << "MHPCHOICETASK" << "," << task_type << "," << trial << "," << rt << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "INCORRECT" << "," << colorcount << "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
+		DataOutputString << "MHPCHOICETASK" << "," << task_type << "," << trial << "," << rt << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "INCORRECT" << "," << "fixme:COLORCNT_PLACEHOLDER" << "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
 	}
 	show_message(outputString.str());
 	vresponse_made = true;

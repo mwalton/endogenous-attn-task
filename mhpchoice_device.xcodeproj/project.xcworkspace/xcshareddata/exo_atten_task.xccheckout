@@ -5,22 +5,18 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>578EA97F-F5A0-4832-A8C5-6ADD45305DF0</string>
+	<string>CD98B084-86B7-48DE-92F4-C4C0A3B071E8</string>
 	<key>IDESourceControlProjectName</key>
-	<string>mhpchoice_device</string>
+	<string>exo_atten_task</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>093A9E84-25A0-4D4D-AEAF-5679DBF83069</key>
-		<string>https://github.com/ucsccogmod/EPICXAF_tls_v1.2.git</string>
 		<key>77F46F6B-F0FD-49F4-A73B-E243C66E531C</key>
 		<string>https://github.com/mwalton/exogenous-attn-task.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>mhpchoice_device.xcodeproj/project.xcworkspace</string>
+	<string>exo_atten_task.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>093A9E84-25A0-4D4D-AEAF-5679DBF83069</key>
-		<string>../../../EPICXAF_tls_v1.2</string>
 		<key>77F46F6B-F0FD-49F4-A73B-E243C66E531C</key>
 		<string>../..</string>
 	</dict>
@@ -32,14 +28,6 @@
 	<string>77F46F6B-F0FD-49F4-A73B-E243C66E531C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>093A9E84-25A0-4D4D-AEAF-5679DBF83069</string>
-			<key>IDESourceControlWCCName</key>
-			<string>EPICXAF_tls_v1</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

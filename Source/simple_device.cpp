@@ -249,7 +249,7 @@ void simple_device::handle_Delay_event(const Symbol& type, const Symbol& datum,
 		case REMOVE_CUE:
 			if (show_states) show_message("********-->STATE: REMOVE_FIXATION",true);
 			//Remove The Fixation, wait 500-1300ms, Show Stimulus
-			remove_fixation_point();
+			remove_cue();
 			state = PRESENT_STIMULUS;
 			stimwaittime = random_int(800) + 500;
 			schedule_delay_event(stimwaittime);
@@ -323,14 +323,14 @@ void simple_device::present_cue()
 	if (show_debug) show_message("present_cue*", true);
 }
 
-void simple_device::remove_fixation_point()
+void simple_device::remove_cue()
 {
-	if (show_debug) show_message("*remove_fixation|");	
+	if (show_debug) show_message("*remove_cue|");
 	
 	// remove the warningstimulus
 	make_visual_object_disappear(cstim_v_name);
 	
-	if (show_debug) show_message("remove_fixation*", true);
+	if (show_debug) show_message("remove_cue*", true);
 }
 
 void simple_device::present_stimulus()
@@ -348,7 +348,10 @@ void simple_device::make_vis_stim_appear()
 	correct_vresp = vresps.at(stim_index);
 	vstim_name = concatenate_to_Symbol(VStim_c, trial);
 	
+    double rand_val = (double)rand() / RAND_MAX;
+    bool isValid;
     
+    isValid = (rand_val < percent_invalid);
     
 	switch(task_type) {
 		case Easy: 

@@ -89,7 +89,7 @@ private:
 	// helpers
 	void parse_condition_string();
 	void present_cue();
-	void remove_fixation_point();
+	void remove_cue();
 	void start_trial();
 	void present_stimulus();
 	void remove_stimulus();

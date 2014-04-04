@@ -24,7 +24,7 @@
 		C304576E0E39350100233D97 /* simple_device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = simple_device.h; path = Source/simple_device.h; sourceTree = "<group>"; };
 		C317A95E13790AF600173B5F /* mhpchoice_clean.prs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhpchoice_clean.prs; sourceTree = "<group>"; };
 		C317A95F13790AF600173B5F /* mhpchoice_clean_tls.prs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhpchoice_clean_tls.prs; sourceTree = "<group>"; };
-		D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmhpchoice_debug_device.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC0630554660B00DB518D /* libendoattn_debug_device.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libendoattn_debug_device.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */,
+				D2AAC0630554660B00DB518D /* libendoattn_debug_device.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,7 +116,7 @@
 			);
 			name = endogenous_attn;
 			productName = JEP99EXPT3_device;
-			productReference = D2AAC0630554660B00DB518D /* libmhpchoice_debug_device.dylib */;
+			productReference = D2AAC0630554660B00DB518D /* libendoattn_debug_device.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_CFLAGS = "";
-				PRODUCT_NAME = mhpchoice_debug_device;
+				PRODUCT_NAME = endoattn_debug_device;
 				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
@@ -197,7 +197,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_CFLAGS = "";
-				PRODUCT_NAME = mhpchoice_release_device;
+				PRODUCT_NAME = endoattn_release_device;
 				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};

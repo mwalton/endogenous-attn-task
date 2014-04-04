@@ -37,8 +37,10 @@ public:
 			
 private:
 	enum task_type_e {Easy, Hard}; //there were made generic so that this .h file could be generic to all prp
+    enum trial_validity_e {Valid, Invalid};
 	
 	task_type_e task_type;
+    trial_validity_e trial_validity;
 	
 	enum State_e {START, START_TRIAL, REMOVE_CUE, PRESENT_STIMULUS, WAITING_FOR_RESPONSE, DISCARD_STIMULUS, SHUTDOWN};
 	
@@ -46,7 +48,7 @@ private:
 	
 	// parameters
 	int n_total_trials;	 //total trials in the run
-	//int colorcount; //number of colors to display
+	int colorcount = 4; //number of colors to display
     double percent_invalid;
 	std::string tagstr; //for any info, defaults to "draft"
 	

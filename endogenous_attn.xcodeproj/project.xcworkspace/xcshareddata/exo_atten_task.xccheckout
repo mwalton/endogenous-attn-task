@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CD98B084-86B7-48DE-92F4-C4C0A3B071E8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>exo_atten_task</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>77F46F6B-F0FD-49F4-A73B-E243C66E531C</key>
+		<string>https://github.com/mwalton/exogenous-attn-task.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>exo_atten_task.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>77F46F6B-F0FD-49F4-A73B-E243C66E531C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mwalton/exogenous-attn-task.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>77F46F6B-F0FD-49F4-A73B-E243C66E531C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>77F46F6B-F0FD-49F4-A73B-E243C66E531C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>exogenous-attn-task</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -36,6 +36,7 @@ using std::ostringstream;
 // handy internal constants
 const Symbol Cue_Left_c("<");
 const Symbol Cue_Rigth_c(">");
+const Symbol Cue_neutral("+");
 const Symbol VCue_c("Cue");
 const Symbol VStim_c("Stimulus");
 
@@ -69,7 +70,7 @@ void simple_device::parse_condition_string()
 {
 	// build an error message string in case we need it
 	string error_msg(condition_string);
-	error_msg += "\n Should be: space-delimited trials(int > 0) proportion of invalid cues(1-4) difficulty(Easy or Hard)";
+	error_msg += "\n Should be: space-delimited trials(int > 0) proportion of invalid cues (0-1) difficulty (Easy or Hard)";
 	istringstream iss(condition_string);
 	
 	int nt;
@@ -136,7 +137,7 @@ void simple_device::initialize()
 	
 		device_out << "**********************************************************************" << endl;
 		device_out << " trial start" << endl;
-		device_out << " Visual Cue '<' or '>' (1000ms)" << endl;
+		device_out << " Visual Cue '<' , '>' or '+' (1000ms)" << endl;
 		device_out << " Blank Screen (500-1300ms)" << endl;
 		device_out << " Stimulus (Red,Green,Blue, or Yellow) square, " << endl;
 		device_out << " {button press --> F or J}" << endl;
@@ -288,13 +289,16 @@ void simple_device::present_cue()
 	
 	if (show_debug) show_message("*present_cue|");
     
-    int left_or_right = rand() % 2;
-    switch (left_or_right) {
+    int select_cue = rand() % 3;
+    switch (select_cue) {
         case 0:
             valid_cue = Cue_Left_c;
             break;
-        default:
+        case 1:
             valid_cue = Cue_Rigth_c;
+            break;
+        default:
+            valid_cue = Cue_neutral;
             break;
     }
 	
@@ -328,29 +332,34 @@ void simple_device::make_vis_stim_appear()
 {
 	if (show_debug) show_message("*make_vis_stim_appear|");
 	int stim_index = random_int(colorcount);				// chooses one of the vstims to display
+
 	vstim_color = vstims.at(stim_index);
 	correct_vresp = (stim_index > 1) ? vresps.at(0) : vresps.at(1); //fixme: response mapping
 	vstim_name = concatenate_to_Symbol(VStim_c, trial);
     
-    //Initially assume a valid cue location, set the eccentricity according to the task_type
+    //Set the eccentricity according to the task_type, assume left then 'swap' by * -1
 	switch(task_type) {
 		case Easy: 
-			if (valid_cue == Cue_Left_c) vstim_xloc = -3.;
-            else vstim_xloc = 3.;
+			vstim_xloc = 3;
 			break;
 		case Hard: 
-			if (valid_cue == Cue_Left_c) vstim_xloc = -7.;
-            else vstim_xloc = 7.;
+			vstim_xloc = 7;
 			break;
 	}
     
-    //Determine if this will be a valid or invalid trial
     double rand_val = (double)rand() / RAND_MAX;
-    if (rand_val > percent_invalid) {
-        trial_validity = Valid;
+    if (valid_cue == Cue_neutral) {
+        trial_validity = Neutral;
+        vstim_xloc *= (rand_val > .5) ? 1 : -1;
     } else {
-        trial_validity = Invalid;
-        vstim_xloc *= -1;  //put the stimulus on the opposite side
+        //Determine if this will be a valid or invalid trial
+        if (rand_val > percent_invalid) {
+            trial_validity = Valid;
+            vstim_xloc *= (valid_cue == Cue_Left_c) ? -1 : 1;
+        } else {
+            trial_validity = Invalid;
+            vstim_xloc *= (valid_cue == Cue_Rigth_c) ? -1 : 1;
+        }
     }
 	
 	make_visual_object_appear(vstim_name, GU::Point(vstim_xloc,0.), vstim_size_c);
@@ -370,21 +379,35 @@ void simple_device::handle_Keystroke_event(const Symbol& key_name)
 	if (show_debug) show_message("*handle_Keystroke_event....",true);
 	//ostringstream outputString;  //defined in simple_device.h (tls)
 	outputString.str("");
+    
+    string validity_string;
+    
+    switch (trial_validity) {
+        case 0:
+            validity_string = "VALID";
+            break;
+        case 1:
+            validity_string = "INVALID";
+            break;
+        default:
+            validity_string = "NEUTRAL";
+            break;
+    }
 	
 	if(key_name == correct_vresp) {
 		long rt = get_time() - vstim_onset;
 		if(trial > 1) current_vrt.update(rt);
 		outputString.str("");
-		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue validity: " << trial_validity << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (CORRECT)" << endl;
-		DataOutputString << "ENDOATTNTASK" << "," << task_type << "," << trial << "," << rt << "," << trial_validity << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "CORRECT" << "," << "fixme:COLORCNT_PLACEHOLDER" << "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
+		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue: " << valid_cue << " | Cue validity: " << validity_string << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (CORRECT)" << endl;
+		DataOutputString << "ENDOATTNTASK" << "," << task_type << "," << trial << "," << rt << "," << valid_cue << "," << validity_string << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "CORRECT" <<  "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
 	}
 	else {
 		//throw Device_exception(this, string("Unrecognized keystroke: ") + key_name.str());
 		long rt = get_time() - vstim_onset;
 		//if(trial > 1) current_vrt.update(rt); //don't average incorrect responses 
 		outputString.str("");
-		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue validity: " << trial_validity << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (INCORRECT)" << endl;
-		DataOutputString << "ENDOATTNTASK" << "," << task_type << "," << trial  << "," << rt << "," << trial_validity << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "INCORRECT" << "," << "fixme:COLORCNT_PLACEHOLDER" << "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
+		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue: " << valid_cue  << " | Cue validity: " << validity_string << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (INCORRECT)" << endl;
+		DataOutputString << "ENDOATTNTASK" << "," << task_type << "," << trial  << "," << rt << "," << valid_cue << "," << validity_string << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "INCORRECT" <<  "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
 	}
 	show_message(outputString.str());
 	vresponse_made = true;
@@ -476,7 +499,7 @@ void simple_device::output_statistics() //const
 	
 	show_message("************* RAW DATA ***************");
 	outputString.str("");
-	outputString << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,NUMCOLORS,STIMWAITTIME,TAG,RULES" << endl;
+	outputString << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,NUMCOLORS,STIMWAITTIME,TAG,RULES" << endl;
 	show_message(outputString.str());
 	show_message(DataOutputString.str());
 	show_message("**************************************");
@@ -508,7 +531,7 @@ void simple_device::openOutputFile(ofstream & outFileStream, const string filena
 		show_message("Error opening output file:" + fileName, true);
 	} 
 	else if (!filealreadyexists) 
-		outFileStream << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,NUMCOLORS,STIMWAITTIME,TAG,RULES" << endl;
+		outFileStream << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,NUMCOLORS,STIMWAITTIME,TAG,RULES" << endl;
 	
 }
 

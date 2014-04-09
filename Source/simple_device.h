@@ -37,7 +37,7 @@ public:
 			
 private:
 	enum task_type_e {Easy, Hard}; //there were made generic so that this .h file could be generic to all prp
-    enum trial_validity_e {Valid, Invalid};
+    enum trial_validity_e {Valid, Invalid, Neutral};
 	
 	task_type_e task_type;
     trial_validity_e trial_validity;
@@ -69,7 +69,7 @@ private:
 
 	int trial;                 //curent trial number
 	bool vresponse_made;       //whether visual response has been made
-	double vstim_xloc;	//holds x offset of vstim
+	double vstim_xloc;          //holds x offset of vstim
 	int stimwaittime;			//time of blank between fixation and stim onset
 	
 	Current_mean current_vrt;

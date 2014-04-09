@@ -27,7 +27,7 @@ If
 Then
 (
 	(Delete (Step Start Trial))
-	(Add (Step Waitfor Visual_Fixation_Onset))
+	(Add (Step Waitfor Visual_Cue_Onset))
 ))
 
 
@@ -50,20 +50,77 @@ Then
 ;#              MAIN RULESET
 //**********************************************************************************************
 
-(VIS_visual_Fixation_onset
+(VIS_visual_CUE_onset
 If
 (
 	(Goal Do choice_task)
-	(Step Waitfor Visual_Fixation_Onset)
-	(Visual ?fixation Detection Onset)	
+	(Step Waitfor Visual_Cue_Onset)
+	(Visual ?cue Detection Onset)	
 	(Motor Ocular Processor Free)
 )
 Then
 (
-	(Attention Cue_Region Upper_Right)
-	(Send_to_motor Ocular Perform Move ?fixation)
-	(Add (Tag ?fixation Fixation_Symbol))
-	(Delete (Step Waitfor Visual_Fixation_Onset))
+	(Send_to_motor Ocular Perform Move ?cue)
+	(Add (Tag ?cue Cue_Symbol))
+	(Delete (Step Waitfor Visual_Cue_Onset))
+	(Add (Step Waitfor Visual_Cue_Text))
+))
+
+(VIS_visual_CUE_text
+If
+(
+	(Goal Do choice_task)
+	(Step Waitfor Visual_Cue_Text)
+	(Visual ?cue Text ?cue_text)
+)
+Then
+(
+	(Add (Tag ?cue_text Attention_Direction))
+	(Delete (Step Waitfor Visual_Cue_Text))
+	(Add (Step Modulate Visual_Attention))
+))
+
+(VIS_Attend_to_NULL
+If
+(
+	(Goal Do choice_task)
+	(Step Modulate Visual_Attention)
+	(Tag ?cue_text Attention_Direction)
+	(EQUAL ?cue_text +)
+)
+Then
+(
+	(Delete (Step Modulate Visual_Attention))
+	(Add (Step Waitfor Visual_Stimulus_Onset))
+))
+
+(VIS_Attend_to_Left
+If
+(
+	(Goal Do choice_task)
+	(Step Modulate Visual_Attention)
+	(Tag ?cue_text Attention_Direction)
+	(EQUAL ?cue_text <)
+)
+Then
+(
+	(Attention Cue_Region Left)
+	(Delete (Step Modulate Visual_Attention))
+	(Add (Step Waitfor Visual_Stimulus_Onset))
+))
+
+(VIS_Attend_to_Right
+If
+(
+	(Goal Do choice_task)
+	(Step Modulate Visual_Attention)
+	(Tag ?cue_text Attention_Direction)
+	(EQUAL ?cue_text >)
+)
+Then
+(
+	(Attention Cue_Region Right)
+	(Delete (Step Modulate Visual_Attention))
 	(Add (Step Waitfor Visual_Stimulus_Onset))
 ))
 
@@ -73,7 +130,7 @@ If
 	(Goal Do choice_task)
 	(Step Waitfor Visual_Stimulus_Onset)
 	(Visual ?visualstimulus Detection Onset)
-	(Tag ?fixation Fixation_Symbol)
+	(Tag ?fixation Cue_Symbol)
 	(DIFFERENT ?visualstimulus ?fixation)
 )
 Then
@@ -114,7 +171,7 @@ If
 )
 Then
 (
-	(Send_to_motor Manual Perform Punch O Left Index)
+	(Send_to_motor Manual Perform Punch F Left Index)
 	(Delete (Step Make Visual_Response))
 	(Add (Step Cleanup Memory))
 ))
@@ -130,7 +187,7 @@ If
 )
 Then
 (
-	(Send_to_motor Manual Perform Punch U Right Index)
+	(Send_to_motor Manual Perform Punch F Left Index)
 	(Delete (Step Make Visual_Response))
 	(Add (Step Cleanup Memory))
 ))
@@ -146,7 +203,7 @@ If
 )
 Then
 (
-	(Send_to_motor Manual Perform Punch I Left Middle)
+	(Send_to_motor Manual Perform Punch J Right Index)
 	(Delete (Step Make Visual_Response))
 	(Add (Step Cleanup Memory))
 ))
@@ -162,7 +219,7 @@ If
 )
 Then
 (
-	(Send_to_motor Manual Perform Punch P Right Middle)
+	(Send_to_motor Manual Perform Punch J Right Index)
 	(Delete (Step Make Visual_Response))
 	(Add (Step Cleanup Memory))
 ))

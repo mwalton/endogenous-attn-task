@@ -373,41 +373,50 @@ void simple_device::make_vis_stim_appear()
 
 
 // here if a keystroke event is received
-//TODO: make compatable w/ attn model
 void simple_device::handle_Keystroke_event(const Symbol& key_name)
 {
 	if (show_debug) show_message("*handle_Keystroke_event....",true);
 	//ostringstream outputString;  //defined in simple_device.h (tls)
 	outputString.str("");
     
-    string validity_string;
+    std::stringstream validity_string;
+    std::stringstream x_loc_string;
     
     switch (trial_validity) {
         case 0:
-            validity_string = "VALID";
+            validity_string << "VALID " << 100 - (percent_invalid * 100) << "%";
             break;
         case 1:
-            validity_string = "INVALID";
+            validity_string << "INVALID " << percent_invalid * 100 << "%";
             break;
         default:
-            validity_string = "NEUTRAL";
+            validity_string << "NEUTRAL 50%";
             break;
     }
+    
+    switch(task_type) {
+		case Easy:
+			x_loc_string << "Easy";
+			break;
+		case Hard:
+			x_loc_string << "Hard";
+			break;
+	}
 	
 	if(key_name == correct_vresp) {
 		long rt = get_time() - vstim_onset;
 		if(trial > 1) current_vrt.update(rt);
 		outputString.str("");
 		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue: " << valid_cue << " | Cue validity: " << validity_string << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (CORRECT)" << endl;
-		DataOutputString << "ENDOATTNTASK" << "," << task_type << "," << trial << "," << rt << "," << valid_cue << "," << validity_string << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "CORRECT" <<  "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
+		DataOutputString << "ENDOATTNTASK" << "," << x_loc_string.str() << "," << trial << "," << rt << "," << valid_cue << "," << validity_string.str() << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "CORRECT" <<  "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
 	}
 	else {
 		//throw Device_exception(this, string("Unrecognized keystroke: ") + key_name.str());
 		long rt = get_time() - vstim_onset;
 		//if(trial > 1) current_vrt.update(rt); //don't average incorrect responses 
 		outputString.str("");
-		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue: " << valid_cue  << " | Cue validity: " << validity_string << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (INCORRECT)" << endl;
-		DataOutputString << "ENDOATTNTASK" << "," << task_type << "," << trial  << "," << rt << "," << valid_cue << "," << validity_string << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "INCORRECT" <<  "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
+		outputString << "Trial #" << trial << " | (choicetask) | RT: " << rt << " | Cue: " << valid_cue  << " | Cue validity: " << validity_string.str() << " | Stimulus: " << vstim_color << " | Keystroke: " << key_name << " | CorrectResponse:" << correct_vresp << " | (INCORRECT)" << endl;
+		DataOutputString << "ENDOATTNTASK" << "," << x_loc_string.str() << "," << trial  << "," << rt << "," << valid_cue << "," << validity_string << "," << vstim_color << "," << vstim_xloc << "," << key_name << "," << correct_vresp << "," << "INCORRECT" <<  "," << stimwaittime << "," << tagstr << "," << prsfilenameonly << endl;
 	}
 	show_message(outputString.str());
 	vresponse_made = true;
@@ -499,7 +508,7 @@ void simple_device::output_statistics() //const
 	
 	show_message("************* RAW DATA ***************");
 	outputString.str("");
-	outputString << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,NUMCOLORS,STIMWAITTIME,TAG,RULES" << endl;
+	outputString << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,STIMWAITTIME,TAG,RULES" << endl;
 	show_message(outputString.str());
 	show_message(DataOutputString.str());
 	show_message("**************************************");
@@ -531,7 +540,7 @@ void simple_device::openOutputFile(ofstream & outFileStream, const string filena
 		show_message("Error opening output file:" + fileName, true);
 	} 
 	else if (!filealreadyexists) 
-		outFileStream << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,NUMCOLORS,STIMWAITTIME,TAG,RULES" << endl;
+		outFileStream << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,STIMWAITTIME,TAG,RULES" << endl;
 	
 }
 

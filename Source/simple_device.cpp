@@ -396,10 +396,10 @@ void simple_device::handle_Keystroke_event(const Symbol& key_name)
     
     switch(task_type) {
 		case Easy:
-			x_loc_string << "Easy";
+			x_loc_string << "3 DVA";
 			break;
 		case Hard:
-			x_loc_string << "Hard";
+			x_loc_string << "7 DVA";
 			break;
 	}
 	
@@ -508,7 +508,7 @@ void simple_device::output_statistics() //const
 	
 	show_message("************* RAW DATA ***************");
 	outputString.str("");
-	outputString << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,STIMWAITTIME,TAG,RULES" << endl;
+	outputString << "\nTASKTYPE,ECCMAGNITUDE,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,STIMWAITTIME,TAG,RULES" << endl;
 	show_message(outputString.str());
 	show_message(DataOutputString.str());
 	show_message("**************************************");
@@ -540,7 +540,7 @@ void simple_device::openOutputFile(ofstream & outFileStream, const string filena
 		show_message("Error opening output file:" + fileName, true);
 	} 
 	else if (!filealreadyexists) 
-		outFileStream << "\nTASKTYPE,DIFFICULTY,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,STIMWAITTIME,TAG,RULES" << endl;
+		outFileStream << "\nTASKTYPE,ECCMAGNITUDE,TRIAL,RT,CUE,CUEVALIDITY,STIMCOLOR,STIMLOC,RESPONSE,CORRECTRESPONSE,ACCURACY,STIMWAITTIME,TAG,RULES" << endl;
 	
 }
 

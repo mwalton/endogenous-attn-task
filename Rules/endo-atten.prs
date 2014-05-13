@@ -1,7 +1,7 @@
 //Setup Initial WM contents. 
 (Define Initial_memory_contents (Goal Do choice_task))
-(Define Parameters (Eye Saliency_map Complex_Gaussian 1.5 0.5 7.5 debug))
-// (Eye Saliency_map BASE_DISTRIBUTION ANGULAR_RES WEIGHT DELAY_DEVIATION_MAGNITUDE opt_DEBUG)
+(Define Parameters (Eye Saliency_map Complex_Gaussian 1.5 7.5 0.5 7.5 debug))
+// (Eye Saliency_map BASE_DISTRIBUTION ANGULAR_RES RADIUS WEIGHT DELAY_DEVIATION_MAGNITUDE opt_DEBUG)
 
 //**********************************************************************************************
 ;#            BLOCK AND TRIAL MANAGEMENT RULES

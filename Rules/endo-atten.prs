@@ -1,6 +1,6 @@
 //Setup Initial WM contents. 
 (Define Initial_memory_contents (Goal Do choice_task))
-(Define Parameters (Eye Saliency_map Complex_Gaussian 1.5 7.5 0.5 7.5 debug))
+(Define Parameters (Eye Saliency_map Gaussian 1.5 35 .6 5))
 // (Eye Saliency_map BASE_DISTRIBUTION ANGULAR_RES RADIUS WEIGHT DELAY_DEVIATION_MAGNITUDE opt_DEBUG)
 
 //**********************************************************************************************
@@ -91,6 +91,7 @@ If
 )
 Then
 (
+	(Attend_to Region Left)
 	(Delete (Step Modulate Visual_Attention))
 	(Add (Step Waitfor Visual_Stimulus_Onset))
 ))
@@ -136,7 +137,6 @@ If
 )
 Then
 (
-	//(Attention Cue ?visualstimulus)
 	(Add (Tag ?visualstimulus Visual_Stimulus)) 
 	(Delete (Step Waitfor Visual_Stimulus_Onset))
 	(Add (Step Waitfor Visual_Stimulus_Color))
